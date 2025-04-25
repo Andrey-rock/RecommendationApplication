@@ -1,20 +1,27 @@
 package org.skypro.RecommendationApplication.service;
 
-import org.skypro.RecommendationApplication.repository.RecommendationsRepository;
+import org.skypro.RecommendationApplication.DTO.RecommendationDTO;
+import org.skypro.RecommendationApplication.rule.RecommendationRuleSet;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class RecommendationService {
 
-    RecommendationsRepository recommendationsRepository;
+    private final List<RecommendationRuleSet> recommendationRuleSets;
 
-    public RecommendationService(RecommendationsRepository recommendationsRepository) {
-        this.recommendationsRepository = recommendationsRepository;
+    public RecommendationService(List<RecommendationRuleSet> recommendationRuleSets) {
+        this.recommendationRuleSets = recommendationRuleSets;
     }
 
-    public void test(UUID uuid) {
-        System.out.println(recommendationsRepository.getRandomTransactionAmount(uuid));
+    public List<RecommendationDTO> getRecommendations(UUID id) {
+        List<RecommendationDTO> recommendationDTOs = new ArrayList<>();
+        for (RecommendationRuleSet ruleSet : recommendationRuleSets) {
+            ruleSet.getRecommendationByUserId(id).ifPresent(recommendationDTOs::add);
+        }
+        return recommendationDTOs;
     }
 }
