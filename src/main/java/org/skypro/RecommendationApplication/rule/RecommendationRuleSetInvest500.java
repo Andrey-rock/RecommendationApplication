@@ -1,6 +1,7 @@
 package org.skypro.RecommendationApplication.rule;
 
 import org.skypro.RecommendationApplication.DTO.RecommendationDTO;
+import org.skypro.RecommendationApplication.service.RuleService;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -20,9 +21,9 @@ public class RecommendationRuleSetInvest500 implements RecommendationRuleSet {
 
     private final static RecommendationDTO recommendationDTO = new RecommendationDTO(ID, NAME, TEXT);
 
-    private final Rule ruleService;
+    private final RuleService ruleService;
 
-    public RecommendationRuleSetInvest500(Rule ruleService) {
+    public RecommendationRuleSetInvest500(RuleService ruleService) {
         this.ruleService = ruleService;
     }
 

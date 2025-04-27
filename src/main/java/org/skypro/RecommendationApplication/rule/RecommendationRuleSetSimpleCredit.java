@@ -1,6 +1,7 @@
 package org.skypro.RecommendationApplication.rule;
 
 import org.skypro.RecommendationApplication.DTO.RecommendationDTO;
+import org.skypro.RecommendationApplication.service.RuleService;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -9,27 +10,25 @@ import java.util.UUID;
 @Component
 public class RecommendationRuleSetSimpleCredit implements RecommendationRuleSet {
 
-    private static final String ID = "59efc529-2fff-41af-baff-90ccd7402925";
-    private static final String NAME = "Top Saving";
+    private static final String ID = "ab138afb-f3ba-4a93-b74f-0fcee86d447f";
+    private static final String NAME = "Простой кредит";
     private static final String TEXT = """
-                Откройте свою собственную «Копилку» с нашим банком! «Копилка» — это уникальный банковский инструмент,
-                который поможет вам легко и удобно накапливать деньги на важные цели. Больше никаких забытых чеков и
-                потерянных квитанций — всё под контролем!
-                Преимущества «Копилки»:
-                Накопление средств на конкретные цели.
-                Установите лимит и срок накопления, и банк будет автоматически
-                переводить определенную сумму на ваш счет.
-                Прозрачность и контроль. Отслеживайте свои доходы и расходы,
-                контролируйте процесс накопления и корректируйте стратегию при необходимости.
-                Безопасность и надежность. Ваши средства находятся под защитой банка, а доступ к ним возможен только через
-                мобильное приложение или интернет-банкинг.
-                Начните использовать «Копилку» уже сегодня и станьте ближе к своим финансовым целям!""";
+                Откройте мир выгодных кредитов с нами!
+                Ищете способ быстро и без лишних хлопот получить нужную сумму? Тогда наш выгодный кредит — именно то,
+                что вам нужно! Мы предлагаем низкие процентные ставки, гибкие условия и индивидуальный подход к каждому клиенту.
+                Почему выбирают нас:
+                Быстрое рассмотрение заявки. Мы ценим ваше время, поэтому процесс рассмотрения заявки занимает всего
+                несколько часов.
+                Удобное оформление. Подать заявку на кредит можно онлайн на нашем сайте или в мобильном приложении.
+                Широкий выбор кредитных продуктов. Мы предлагаем кредиты на различные цели: покупку недвижимости,
+                автомобиля, образование, лечение и многое другое.
+                Не упустите возможность воспользоваться выгодными условиями кредитования от нашей компании!""";
 
     private final static RecommendationDTO recommendationDTO = new RecommendationDTO(ID, NAME, TEXT);
 
-    private final Rule ruleService;
+    private final RuleService ruleService;
 
-    public RecommendationRuleSetSimpleCredit(Rule ruleService) {
+    public RecommendationRuleSetSimpleCredit(RuleService ruleService) {
         this.ruleService = ruleService;
     }
 
@@ -39,8 +38,8 @@ public class RecommendationRuleSetSimpleCredit implements RecommendationRuleSet 
     @Override
     public Optional<RecommendationDTO> getRecommendationByUserId(UUID id) {
 
-        if (ruleService.checkDebitOperation(id) &&
-                ((ruleService.getAmountDebitDeposits(id) > 50000) || (ruleService.getAmountSavingDeposits(id) > 50000)) &&
+        if (!ruleService.checkCreditOperation(id) &&
+                (ruleService.getAmountDebitDeposits(id) > 100000) &&
                 (ruleService.getAmountDebitDeposits(id) > ruleService.getAmountDebitWithdrawals(id))) {
             return Optional.of(recommendationDTO);
         } else {
