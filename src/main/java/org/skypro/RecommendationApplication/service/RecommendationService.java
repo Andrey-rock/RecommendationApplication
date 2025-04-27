@@ -19,8 +19,8 @@ public class RecommendationService {
 
     public List<RecommendationDTO> getRecommendations(UUID id) {
         List<RecommendationDTO> recommendationDTOs = new ArrayList<>();
-        for (RecommendationRuleSet ruleSet : recommendationRuleSets) {
-            ruleSet.getRecommendationByUserId(id).ifPresent(recommendationDTOs::add);
+        for (RecommendationRuleSet recommendation : recommendationRuleSets) {
+            recommendation.getRecommendationByUserId(id).ifPresent(recommendationDTOs::add);
         }
         return recommendationDTOs;
     }

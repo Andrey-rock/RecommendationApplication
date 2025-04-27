@@ -25,6 +25,8 @@ public class RecommendationRuleSetSimpleCredit implements RecommendationRuleSet 
                 мобильное приложение или интернет-банкинг.
                 Начните использовать «Копилку» уже сегодня и станьте ближе к своим финансовым целям!""";
 
+    private final static RecommendationDTO recommendationDTO = new RecommendationDTO(ID, NAME, TEXT);
+
     private final Rule ruleService;
 
     public RecommendationRuleSetSimpleCredit(Rule ruleService) {
@@ -40,7 +42,7 @@ public class RecommendationRuleSetSimpleCredit implements RecommendationRuleSet 
         if (ruleService.checkDebitOperation(id) &&
                 ((ruleService.getAmountDebitDeposits(id) > 50000) || (ruleService.getAmountSavingDeposits(id) > 50000)) &&
                 (ruleService.getAmountDebitDeposits(id) > ruleService.getAmountDebitWithdrawals(id))) {
-            return Optional.of(new RecommendationDTO(ID, NAME, TEXT));
+            return Optional.of(recommendationDTO);
         } else {
             return Optional.empty();
         }

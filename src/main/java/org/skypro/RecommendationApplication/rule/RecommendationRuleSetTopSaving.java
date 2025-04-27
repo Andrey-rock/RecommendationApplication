@@ -23,6 +23,8 @@ public class RecommendationRuleSetTopSaving implements RecommendationRuleSet {
                 автомобиля, образование, лечение и многое другое.
                 Не упустите возможность воспользоваться выгодными условиями кредитования от нашей компании!""";
 
+    private final static RecommendationDTO recommendationDTO = new RecommendationDTO(ID, NAME, TEXT);
+
     private final Rule ruleService;
 
     public RecommendationRuleSetTopSaving(Rule ruleService) {
@@ -38,7 +40,7 @@ public class RecommendationRuleSetTopSaving implements RecommendationRuleSet {
         if (!ruleService.checkCreditOperation(id) &&
                 (ruleService.getAmountDebitDeposits(id) > 100000) &&
                 (ruleService.getAmountDebitDeposits(id) > ruleService.getAmountDebitWithdrawals(id))) {
-            return Optional.of(new RecommendationDTO(ID, NAME, TEXT));
+            return Optional.of(recommendationDTO);
         } else {
             return Optional.empty();
         }
