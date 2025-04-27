@@ -9,21 +9,9 @@ import java.util.UUID;
 @Component
 public class RecommendationRuleSetTopSaving implements RecommendationRuleSet {
 
-    private final Rule rule;
-
-    public RecommendationRuleSetTopSaving(Rule rule) {
-        this.rule = rule;
-    }
-
-    /**
-     * @param id
-     */
-    @Override
-    public Optional<RecommendationDTO> getRecommendationByUserId(UUID id) {
-
-        String ID = "ab138afb-f3ba-4a93-b74f-0fcee86d447f";
-        String NAME = "Простой кредит";
-        String TEXT = """
+    private static final String ID = "ab138afb-f3ba-4a93-b74f-0fcee86d447f";
+    private static final String NAME = "Простой кредит";
+    private static final String TEXT = """
                 Откройте мир выгодных кредитов с нами!
                 Ищете способ быстро и без лишних хлопот получить нужную сумму? Тогда наш выгодный кредит — именно то,
                 что вам нужно! Мы предлагаем низкие процентные ставки, гибкие условия и индивидуальный подход к каждому клиенту.
@@ -35,9 +23,21 @@ public class RecommendationRuleSetTopSaving implements RecommendationRuleSet {
                 автомобиля, образование, лечение и многое другое.
                 Не упустите возможность воспользоваться выгодными условиями кредитования от нашей компании!""";
 
-        if (!rule.checkCreditOperation(id) &&
-                (rule.getAmountDebitDeposits(id) > 100000) &&
-                (rule.getAmountDebitDeposits(id) > rule.getAmountDebitWithdrawals(id))) {
+    private final Rule ruleService;
+
+    public RecommendationRuleSetTopSaving(Rule ruleService) {
+        this.ruleService = ruleService;
+    }
+
+    /**
+     * @param id
+     */
+    @Override
+    public Optional<RecommendationDTO> getRecommendationByUserId(UUID id) {
+
+        if (!ruleService.checkCreditOperation(id) &&
+                (ruleService.getAmountDebitDeposits(id) > 100000) &&
+                (ruleService.getAmountDebitDeposits(id) > ruleService.getAmountDebitWithdrawals(id))) {
             return Optional.of(new RecommendationDTO(ID, NAME, TEXT));
         } else {
             return Optional.empty();

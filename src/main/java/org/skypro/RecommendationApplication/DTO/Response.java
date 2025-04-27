@@ -11,6 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Response {
-    private UUID uuid;
+    private UUID user_id;
     private List<RecommendationDTO> recommendations;
 }

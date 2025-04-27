@@ -21,9 +21,6 @@ public class RecommendationController {
     @GetMapping("/recommendation/{id}")
     public Response getRecommendations (@PathVariable UUID id) {
         List<RecommendationDTO> recommendations = recommendationService.getRecommendations(id);
-        Response response = new Response();
-        response.setRecommendations(recommendations);
-        response.setUuid(id);
-        return response;
+        return new Response(id, recommendations);
     }
 }
