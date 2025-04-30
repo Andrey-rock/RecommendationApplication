@@ -30,11 +30,13 @@ public class RuleService {
     }
 
     public int getAmountDebitDeposits(UUID id) {
+
         return recommendationsRepository.getSumOperationByProduct(id, "DEBIT",
                 "DEPOSIT");
     }
 
     public int getAmountDebitWithdrawals(UUID id) {
+
         return recommendationsRepository.getSumOperationByProduct(id, "DEBIT",
                 "WITHDRAW");
     }
