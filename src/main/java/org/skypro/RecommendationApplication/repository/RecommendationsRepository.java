@@ -5,7 +5,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Repository
@@ -34,7 +33,7 @@ public class RecommendationsRepository {
     }
 
     public int getSumOperationByProduct(UUID user, String productType, String operationType) {
-        Integer result;
+        int result;
         try {
             result = jdbcTemplate.queryForObject(
                     "SELECT SUM(t.AMOUNT) сумма\n" +
