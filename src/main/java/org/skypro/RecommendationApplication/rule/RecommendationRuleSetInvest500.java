@@ -10,7 +10,7 @@ import java.util.UUID;
 @Component
 public class RecommendationRuleSetInvest500 implements RecommendationRuleSet {
 
-    private final static String ID = "147f6a0f-3b91-413b-ab99-87f081d60d5a";
+    private final static UUID ID = UUID.fromString("147f6a0f-3b91-413b-ab99-87f081d60d5a");
     private final static String NAME = "Invest 500";
     private final static String TEXT = "Откройте свой путь к успеху с индивидуальным инвестиционным счетом (ИИС) " +
             "от нашего банка! " +
