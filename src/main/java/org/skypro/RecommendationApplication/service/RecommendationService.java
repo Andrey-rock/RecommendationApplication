@@ -5,12 +5,16 @@ import org.skypro.RecommendationApplication.model.DynamicRule;
 import org.skypro.RecommendationApplication.model.Request;
 import org.skypro.RecommendationApplication.repository.RecommendationsRepository;
 import org.skypro.RecommendationApplication.rule.RecommendationRuleSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class RecommendationService {
+
+    private final Logger logger = LoggerFactory.getLogger(RecommendationService.class);
 
     private final List<RecommendationRuleSet> recommendationRuleSets;
 
@@ -25,12 +29,14 @@ public class RecommendationService {
     }
 
     public List<RecommendationDTO> getRecommendations(UUID id) {
+
         List<RecommendationDTO> recommendationDTOs = new ArrayList<>();
         for (RecommendationRuleSet recommendation : recommendationRuleSets) {
             recommendation.getRecommendationByUserId(id).ifPresent(recommendationDTOs::add);
         }
         List<RecommendationDTO> dynamicRecommendationDTOs = getDynamicRuleRecommendations(id);
         recommendationDTOs.addAll(dynamicRecommendationDTOs);
+
         return recommendationDTOs;
     }
 
