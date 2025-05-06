@@ -10,7 +10,7 @@ import java.util.UUID;
 @Component
 public class RecommendationRuleSetTopSaving implements RecommendationRuleSet {
 
-    private static final String ID = "59efc529-2fff-41af-baff-90ccd7402925";
+    private static final UUID ID = UUID.fromString("59efc529-2fff-41af-baff-90ccd7402925");
     private static final String NAME = "Top Saving";
     private static final String TEXT = """
                 Откройте свою собственную «Копилку» с нашим банком! «Копилка» — это уникальный банковский инструмент,

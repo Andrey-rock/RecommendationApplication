@@ -34,5 +34,5 @@ build/
 /mvnw
 /mvnw.cmd
 /.gitattributes
-/transaction.mv.db
-/transaction.trace.db
+/src/transaction.mv.db
+/src/transaction.trace.db

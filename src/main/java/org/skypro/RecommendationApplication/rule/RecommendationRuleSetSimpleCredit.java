@@ -10,7 +10,7 @@ import java.util.UUID;
 @Component
 public class RecommendationRuleSetSimpleCredit implements RecommendationRuleSet {
 
-    private static final String ID = "ab138afb-f3ba-4a93-b74f-0fcee86d447f";
+    private static final UUID ID = UUID.fromString("ab138afb-f3ba-4a93-b74f-0fcee86d447f");
     private static final String NAME = "Простой кредит";
     private static final String TEXT = """
                 Откройте мир выгодных кредитов с нами!
