@@ -1,4 +1,4 @@
-package org.skypro.RecommendationApplication.listener;
+package org.skypro.RecommendationApplication.bot;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.regex.Matcher;
 
 @Service
 public class TelegramBotUpdatesListener implements UpdatesListener {
@@ -20,6 +19,9 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
 
     @Autowired
     private TelegramBot telegramBot;
+
+    @Autowired
+    private TelegramBotService telegramBotService;
 
     @PostConstruct
     public void init() {
@@ -36,9 +38,18 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             String userName = update.message().chat().firstName();
 
             if (usersText.equals("/start")) {
-                String text = "Привет, " + userName + "!\nЯ бот для получения рекомендаций.\nВведи команду" +
+                String text = "Привет, " + userName + "!\nЯ бот для получения рекомендаций.\nВведи команду " +
                         "/recommend username";
                 telegramBot.execute(new SendMessage(chatId, text));
+            }
+
+            else if (usersText.startsWith("/recommend")) {
+                String username = usersText.substring("/recommend".length() + 1);
+                telegramBotService.getRecommendations(chatId, username);
+            }
+
+            else {
+                telegramBot.execute(new SendMessage(chatId, "команда не распознана"));
             }
 
         });
