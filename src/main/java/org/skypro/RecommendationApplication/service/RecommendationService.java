@@ -22,10 +22,13 @@ public class RecommendationService {
 
     private final DynamicRuleService dynamicRuleService;
 
-    public RecommendationService(List<RecommendationRuleSet> recommendationRuleSets, RecommendationsRepository recommendationsRepository, DynamicRuleService dynamicRuleService) {
+    private final StatsService statsService;
+
+    public RecommendationService(List<RecommendationRuleSet> recommendationRuleSets, RecommendationsRepository recommendationsRepository, DynamicRuleService dynamicRuleService, StatsService statsService) {
         this.recommendationRuleSets = recommendationRuleSets;
         this.recommendationsRepository = recommendationsRepository;
         this.dynamicRuleService = dynamicRuleService;
+        this.statsService = statsService;
     }
 
     public List<RecommendationDTO> getRecommendations(UUID id) {
@@ -54,6 +57,7 @@ public class RecommendationService {
                 RecommendationDTO recommendationDTO = new RecommendationDTO(dynamicRule.getId(),
                         dynamicRule.getProduct_name(),
                         dynamicRule.getProduct_text());
+                statsService.incrementCount(dynamicRule.getId());
 
                 recommendationDTOs.add(recommendationDTO);
             }
