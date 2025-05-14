@@ -1,5 +1,6 @@
 package org.skypro.RecommendationApplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Stats {
 
     @OneToOne
     @JoinColumn(name = "id")
+    @JsonIgnore
     private DynamicRule dynamicRule;
 
     private int count;

@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -90,5 +91,10 @@ public class RecommendationsRepository {
                 userRowMapper,
                 username
         );
+    }
+
+    public void clearCash() {
+        cache1.invalidateAll();
+        cache2.invalidateAll();
     }
 }

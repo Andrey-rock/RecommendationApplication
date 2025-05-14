@@ -5,8 +5,6 @@ import org.skypro.RecommendationApplication.model.DynamicRule;
 import org.skypro.RecommendationApplication.model.Request;
 import org.skypro.RecommendationApplication.repository.RecommendationsRepository;
 import org.skypro.RecommendationApplication.rule.RecommendationRuleSet;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,7 +12,6 @@ import java.util.*;
 @Service
 public class RecommendationService {
 
-    private final Logger logger = LoggerFactory.getLogger(RecommendationService.class);
 
     private final List<RecommendationRuleSet> recommendationRuleSets;
 

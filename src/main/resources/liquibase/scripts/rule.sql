@@ -15,3 +15,6 @@ CREATE TABLE stats (
     count INT,
     FOREIGN KEY (rule_id) REFERENCES Dynamic_rule(id) ON DELETE CASCADE
 );
+
+-- changeset andrey-rock:3
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

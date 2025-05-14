@@ -1,5 +1,6 @@
 package org.skypro.RecommendationApplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,4 +29,8 @@ public class DynamicRule {
 
     @JdbcTypeCode(SqlTypes.JSON)
     private Request[] rule;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "dynamicRule", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Stats stats;
 }
