@@ -29,8 +29,4 @@ public class DynamicRule {
 
     @JdbcTypeCode(SqlTypes.JSON)
     private Request[] rule;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "dynamicRule", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Stats stats;
 }

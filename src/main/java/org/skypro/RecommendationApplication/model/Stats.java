@@ -19,7 +19,7 @@ public class Stats {
     @GeneratedValue
     private UUID id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id")
     @JsonIgnore
     private DynamicRule dynamicRule;
