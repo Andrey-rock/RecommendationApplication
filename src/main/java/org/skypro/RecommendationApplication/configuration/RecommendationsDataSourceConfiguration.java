@@ -1,5 +1,7 @@
 package org.skypro.RecommendationApplication.configuration;
 
+import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.model.DeleteMyCommands;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,5 +36,15 @@ public class RecommendationsDataSourceConfiguration {
             @Qualifier("recommendationsDataSource") DataSource dataSource
     ) {
         return new JdbcTemplate(dataSource);
+    }
+
+    @Value("${telegram.bot.token}")
+    private String token;
+
+    @Bean
+    public TelegramBot telegramBot() {
+        TelegramBot bot = new TelegramBot(token);
+        bot.execute(new DeleteMyCommands());
+        return bot;
     }
 }

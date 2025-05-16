@@ -7,3 +7,14 @@ CREATE TABLE Dynamic_rule (
     product_text varchar(500),
     rule JSON
 );
+
+-- changeset andrey-rock:2
+CREATE TABLE stats (
+    id UUID primary key,
+    rule_id UUID not null,
+    count INT,
+    FOREIGN KEY (rule_id) REFERENCES Dynamic_rule(id) ON DELETE CASCADE
+);
+
+-- changeset andrey-rock:3
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
