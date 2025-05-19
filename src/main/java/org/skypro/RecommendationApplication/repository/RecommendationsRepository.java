@@ -3,11 +3,14 @@ package org.skypro.RecommendationApplication.repository;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import org.skypro.RecommendationApplication.model.CompositeKey;
+import org.skypro.RecommendationApplication.model.User;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -72,5 +75,26 @@ public class RecommendationsRepository {
             result = 0;
         }
         return result;
+    }
+
+    public User getUserByUsername(String username) {
+        final RowMapper<User> userRowMapper = (resultSet, rowNum) -> {
+            User user = new User();
+            user.setId(UUID.fromString(resultSet.getString("ID")));
+            user.setUsername(resultSet.getString("USERNAME"));
+            user.setFirst_name(resultSet.getString("FIRST_NAME"));
+            user.setLast_name(resultSet.getString("LAST_NAME"));
+            return user;
+        };
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM USERS WHERE USERNAME = ?;",
+                userRowMapper,
+                username
+        );
+    }
+
+    public void clearCash() {
+        cache1.invalidateAll();
+        cache2.invalidateAll();
     }
 }

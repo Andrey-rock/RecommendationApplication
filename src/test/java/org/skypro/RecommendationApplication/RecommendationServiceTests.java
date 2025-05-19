@@ -9,9 +9,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.skypro.RecommendationApplication.DTO.RecommendationDTO;
+import org.skypro.RecommendationApplication.model.Stats;
+import org.skypro.RecommendationApplication.repository.RecommendationsRepository;
 import org.skypro.RecommendationApplication.rule.*;
+import org.skypro.RecommendationApplication.service.DynamicRuleService;
 import org.skypro.RecommendationApplication.service.RecommendationService;
 import org.skypro.RecommendationApplication.service.RuleService;
+import org.skypro.RecommendationApplication.service.StatsService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,15 @@ public class RecommendationServiceTests {
 
     @Mock
     private RuleService ruleService;
+
+    @Mock
+    private RecommendationsRepository ruleRepository;
+
+    @Mock
+    private DynamicRuleService dynamicRuleService;
+
+    @Mock
+    private StatsService statsService;
 
     @InjectMocks
     private RecommendationRuleSetInvest500 recommendationRuleSetInvest500;
@@ -40,7 +53,7 @@ public class RecommendationServiceTests {
         recommendationRuleSets.add(recommendationRuleSetInvest500);
         recommendationRuleSets.add(recommendationRuleSetTopSaving);
         recommendationRuleSets.add(recommendationRuleSetSimpleCredit);
-        recommendationService = new RecommendationService(recommendationRuleSets);
+        recommendationService = new RecommendationService(recommendationRuleSets, ruleRepository, dynamicRuleService, statsService);
     }
 
     //Тест на выдачу рекомендации продукта "Invest500"
