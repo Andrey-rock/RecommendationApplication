@@ -25,10 +25,10 @@ public class RecommendationController {
     @GetMapping("/recommendation/{id}")
     public Response getRecommendations (@PathVariable UUID id) {
 
-        logger.info("Start get recommendations for {}", id);
+        logger.debug("Start get recommendations for {}", id);
         List<RecommendationDTO> recommendations = recommendationService.getRecommendations(id);
 
-        logger.info("End get recommendations for {}", id);
+        logger.debug("End get recommendations for {}", id);
         return new Response(id, recommendations);
     }
 }
