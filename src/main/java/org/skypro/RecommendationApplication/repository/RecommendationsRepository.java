@@ -2,6 +2,7 @@ package org.skypro.RecommendationApplication.repository;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
+import org.skypro.RecommendationApplication.exeption.UserNotFoundException;
 import org.skypro.RecommendationApplication.model.CompositeKey;
 import org.skypro.RecommendationApplication.model.User;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -77,7 +78,7 @@ public class RecommendationsRepository {
         return result;
     }
 
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(String username) throws UserNotFoundException {
         final RowMapper<User> userRowMapper = (resultSet, rowNum) -> {
             User user = new User();
             user.setId(UUID.fromString(resultSet.getString("ID")));
@@ -86,11 +87,17 @@ public class RecommendationsRepository {
             user.setLast_name(resultSet.getString("LAST_NAME"));
             return user;
         };
-        return jdbcTemplate.queryForObject(
-                "SELECT * FROM USERS WHERE USERNAME = ?;",
-                userRowMapper,
-                username
-        );
+        User user = null;
+        try {
+            user = jdbcTemplate.queryForObject(
+                    "SELECT * FROM USERS WHERE USERNAME = ?;",
+                    userRowMapper,
+                    username
+            );
+        } catch (DataAccessException e) {
+            throw new UserNotFoundException();
+        }
+        return user;
     }
 
     public void clearCash() {
