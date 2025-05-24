@@ -131,4 +131,21 @@ public class RecommendationServiceTests {
 
         Assertions.assertEquals(List.of(), recommendations);
     }
+
+    //Тест на выдачу рекомендации динамического правила
+    @Test
+    void whenDynamicRecommendationAppropriate_thenRecommendHer() {
+        UUID id1 = UUID.randomUUID();
+        UUID id2 = UUID.randomUUID();
+        String name = "Test ";
+        String text = "Test Dynamic Recommendation";
+        RecommendationDTO recommendationDTO = new RecommendationDTO(id1, name, text);
+        List<RecommendationDTO> recommendations1 = new ArrayList<>();
+        recommendations1.add(recommendationDTO);
+        Mockito.when(dynamicRuleService.getDynamicRuleRecommendations(id2)).thenReturn(recommendations1);
+
+        List<RecommendationDTO> recommendations2 = recommendationService.getRecommendations(id2);
+
+        Assertions.assertEquals(recommendations1, recommendations2);
+    }
 }
