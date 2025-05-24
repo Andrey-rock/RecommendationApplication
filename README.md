@@ -5,9 +5,9 @@
 Серверное приложение для рекомендаций банковских продуктов.
 Приложение Spring Boot, Java.
 
-Wiki [Главная страница](https://github.com/Andrey-rock/RecommendationApplication.wiki.git)
+Wiki [Главная страница](https://github.com/Andrey-rock/RecommendationApplication/wiki/%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0)
 
-Требования к разработке  [Требования](https://github.com/Andrey-rock/RecommendationApplication.wiki.git)
+Требования к разработке  [Требования](https://github.com/Andrey-rock/RecommendationApplication/wiki/%D0%A2%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
 
 ## Подготовка к развёртыванию на узле
 
