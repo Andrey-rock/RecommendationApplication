@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import jakarta.annotation.PostConstruct;
+import org.jetbrains.annotations.NotNull;
 import org.skypro.RecommendationApplication.exeption.UserNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Прослушивающий класс телеграм-бота. Ждет ввод от пользователя и выполняет команды.
+ *
+ * @author Andrei Bronskii, 2025
+ * @version 0.0.1
+ */
 @Service
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
@@ -29,8 +36,16 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         telegramBot.setUpdatesListener(this);
     }
 
+    /**
+     * Основной метод бота. Ждет ввод от пользователя и выполняет команды. Обработку команд делегирует
+     * сервису TelegramBotService
+     *
+     * @param updates Входящая информация.
+     * @return Подтверждение, что команды выполнены.
+     */
     @Override
-    public int process(List<Update> updates) {
+    public int process(@NotNull List<Update> updates) {
+
         updates.forEach(update -> {
             logger.info("Processing update: {}", update);
             // Process your updates here

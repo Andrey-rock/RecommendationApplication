@@ -122,6 +122,8 @@ public class DynamicRuleService {
      * @param id Индентификатор пользователя.
      * @param request Запрос к БД. (Динамическое правило содержит несколько запросов).
      * @return true, если пользователь соответствует критериям запроса, иначе false.
+     *
+     * @throws IllegalStateException, если аргументы запроса некорректны
      */
     private boolean checkRequest(UUID id, @NotNull Request request) {
         String type = request.getQuery();

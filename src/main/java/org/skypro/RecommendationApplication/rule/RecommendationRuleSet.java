@@ -13,5 +13,9 @@ import java.util.UUID;
  */
 public interface RecommendationRuleSet {
 
+    /**
+     * @param id Индентификатор пользователя.
+     * @return Рекомендацию для пользвателя, если он подходит, если нет пустой Optional
+     */
     Optional<RecommendationDTO> getRecommendationByUserId(UUID id);
 }

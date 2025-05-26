@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * Модель запроса.
+ *
+ * @author Andrei Bronskii, 2025
+ * @version 0.0.1
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
