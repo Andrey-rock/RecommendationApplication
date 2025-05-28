@@ -70,6 +70,7 @@ public class RecommendationsRepository {
 
     /**
      * Возвращает количество операций пользователя с продуктом из БД.
+     * Если операций нет queryForObject кидает исключение DataAccessException, в этом случае возвращается 0.
      *
      * @param user Индентификатор пользователя.
      * @param productType Тип продукта (DEBIT, CREDIT, SAVING или INVEST)
@@ -94,7 +95,9 @@ public class RecommendationsRepository {
 
     /**
      * Возвращает итоговую сумму операций пользователя с продуктом из БД.
-     * @param user Индентификатор пользователя.
+     * Если операций нет queryForObject кидает исключение DataAccessException, в этом случае возвращается 0.
+     *
+     * @param user Идентификатор пользователя.
      * @param productType Тип продукта (DEBIT, CREDIT, SAVING или INVEST).
      * @param operationType Тип операции (DEPOSIT или WITHDRAW).
      * @return Итоговую сумму операций.
