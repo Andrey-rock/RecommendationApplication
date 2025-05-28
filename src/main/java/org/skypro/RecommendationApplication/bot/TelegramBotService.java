@@ -12,6 +12,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Сервисный класс телеграм-бота. Инкапсулирует бизнес-логику.
+ *
+ * @author Andrei Bronskii, 2025
+ * @version 0.0.1
+ */
 @Service
 public class TelegramBotService {
 
@@ -28,6 +34,13 @@ public class TelegramBotService {
         this.recommendationService = recommendationService;
     }
 
+    /**
+     * Метод выдачи рекомендаций по нику пользователя.
+     *
+     * @param chatId Идентификатор чата в который следует посылать ответ.
+     * @param username Ник пользователя.
+     * @throws UserNotFoundException, если пользователь с заданным ником не найден в БД.
+     */
     public void getRecommendations(Long chatId, String username) throws UserNotFoundException {
         User user = recommendationsRepository.getUserByUsername(username);
         UUID id = user.getId();

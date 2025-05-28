@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Реализация RecommendationRuleSet для продукта "Top Saving".
+ *
+ * @author Andrei Bronskii, 2025
+ * @version 0.0.1
+ */
 @Component
 public class RecommendationRuleSetTopSaving implements RecommendationRuleSet {
 
@@ -35,7 +41,14 @@ public class RecommendationRuleSetTopSaving implements RecommendationRuleSet {
     }
 
     /**
-     * @param id
+     * Реализация. Проверяет соответствие пользователя следующим правилам:
+     * 1. Пользователь использует как минимум один продукт с типом DEBIT.
+     * 2. Сумма пополнений по всем продуктам типа DEBIT больше или равна 50 000 ₽ ИЛИ
+     * Сумма пополнений по всем продуктам типа SAVING больше или равна 50 000 ₽.
+     * 3. Сумма пополнений по всем продуктам типа DEBIT больше, чем сумма трат по всем продуктам типа DEBIT.
+     *
+     * @param id Индентификатор пользователя.
+     * @return Рекомендацию для пользвателя, если он подходит, если нет пустой Optional
      */
     @Override
     public Optional<RecommendationDTO> getRecommendationByUserId(UUID id) {

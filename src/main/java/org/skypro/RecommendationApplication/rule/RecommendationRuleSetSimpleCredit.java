@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Реализация RecommendationRuleSet для продукта "Простой кредит".
+ *
+ * @author Andrei Bronskii, 2025
+ * @version 0.0.1
+ */
 @Component
 public class RecommendationRuleSetSimpleCredit implements RecommendationRuleSet {
 
@@ -33,7 +39,13 @@ public class RecommendationRuleSetSimpleCredit implements RecommendationRuleSet 
     }
 
     /**
-     * @param id
+     * Реализация. Проверяет соответствие пользователя следующим правилам:
+     * 1. Пользователь не использует продукты с типом CREDIT.
+     * 2. Сумма пополнений по всем продуктам типа DEBIT больше, чем сумма трат по всем продуктам типа DEBIT.
+     * 3. Сумма трат по всем продуктам типа DEBIT больше, чем 100 000 ₽.
+     *
+     * @param id Индентификатор пользователя.
+     * @return Рекомендацию для пользвателя, если он подходит, если нет пустой Optional
      */
     @Override
     public Optional<RecommendationDTO> getRecommendationByUserId(UUID id) {

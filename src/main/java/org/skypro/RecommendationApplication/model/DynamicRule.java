@@ -9,6 +9,12 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.UUID;
 
+/**
+ * Сущность динамического правила.
+ *
+ * @author Andrei Bronskii, 2025
+ * @version 0.0.1
+ */
 @Entity
 @Table(name = "Dynamic_rule")
 @Data
