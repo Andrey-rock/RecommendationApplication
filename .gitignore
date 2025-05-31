@@ -36,3 +36,4 @@ build/
 /.gitattributes
 /src/transaction.mv.db
 /src/transaction.trace.db
+/config.properties
